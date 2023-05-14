@@ -18,17 +18,23 @@ export const login = async (req, res) => {
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
 
-    res
-      .status(200)
-      .cookie("token", token, {
-        expires: new Date(Date.now() + 1800000),// 30 * 60 * 1000
-        httpOnly: true,
-      })
-      .json({
-        success: true,
-        message: "Logged In Successfully",
-        user
-      });
+    // res
+    //   .status(200)
+    //   .cookie("token", token, {
+    //     expires: new Date(Date.now() + 1800000),// 30 * 60 * 1000
+    //     httpOnly: true,
+    //   })
+    //   .json({
+    //     success: true,
+    //     message: "Logged In Successfully",
+    //     user
+    //   });
+
+
+    res.status(200)
+        .send({success:true,message: "Logged In Successfully",user, token})
+
+
   } catch (error) {
     return res.status(400).json({
       success: false,
